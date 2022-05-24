@@ -1,0 +1,41 @@
+/**Marie's Store:
+Paper, $1, inventory 50, variations 5, location aisle 2
+Album, $20, inventory 5, variations 3, location aisle 1
+Stickers, $5, inventory 10, variations 8, location aisle 3
+Tape, $6, inventory 11, variations 2, location aisle 7
+Stamps, $7, inventory 6, variations 3, location aisle 8
+Ink, $9, inventory 6, variations 4, location aisle 8
+Punch, $12, inventory 4, variations 2, location 6
+Pens, $15, inventory 2, variations 1, location 6
+Paper Pad, $22, inventory 3, variations 1, location 2
+Glitter Paper, $2, inventory 15, variatios 2, location 2
+Scissors, $15, inventory 3, variations 1, location 6
+Markers, $11, inventory 4, variations 1, location 6
+Sticker Pack, $15, inventory 4, variations 2, location 3
+Vinyl, $8, inventory 15, variations 3, location 4
+Cricut, $300, inventory 2, variations 2, location 4
+**/
+
+CREATE TABLE maries_store (id INTEGER PRIMARY KEY, product_name TEXT, price INTEGER, inventory INTEGER, variations INTEGER, location INTEGER);
+
+INSERT INTO maries_store VALUES (1, "Paper", 1, 50, 5, 2);
+INSERT INTO maries_store VALUES (2, "Album", 20, 5, 3, 1);
+INSERT INTO maries_store VALUES (3, "Stickers", 5, 10, 8, 3);
+INSERT INTO maries_store VALUES (4, "Tape", 6, 11, 2, 7);
+INSERT INTO maries_store VALUES (5, "Stamps", 7, 6, 3, 8);
+INSERT INTO maries_store VALUES (6, "Ink", 9, 6, 4, 8);
+INSERT INTO maries_store VALUES (7, "Punch", 12, 4, 2, 6);
+INSERT INTO maries_store VALUES (8, "Pens", 15, 2, 1, 6);
+INSERT INTO maries_store VALUES (9, "Paper Pad", 22, 3, 1, 2);
+INSERT INTO maries_store VALUES (10, "Glitter Paper", 2, 15, 2, 2);
+INSERT INTO maries_store VALUES (11, "Scissors", 15, 3, 1, 6);
+INSERT INTO maries_store VALUES (12, "Markers", 11, 4, 1, 6);
+INSERT INTO maries_store VALUES (13, "Sticker Pack", 15, 4, 2, 3);
+INSERT INTO maries_store VALUES (14, "Vinyl", 8, 15, 3, 4);
+INSERT INTO maries_store VALUES (15, "Cricut", 300, 2, 2, 4);
+
+What are the prices on the items in the store?
+SELECT * FROM maries_store ORDER BY (price);
+
+How much inventory is the store carrying?
+SELECT SUM (inventory) FROM maries_store;
