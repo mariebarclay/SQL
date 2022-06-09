@@ -1,0 +1,38 @@
+# For this project, I downloaded Goodreads data from Kaggle.
+# Then I created a table to insert Goodreads data into.
+# Finally, I performed analytics on the data using SQL. 
+
+CREATE TABLE BIT_DB.Goodreads (
+id integer PRIMARY KEY,
+title TEXT NOT NULL,
+authors TEXT NOT NULL,
+average_rating INTEGER NOT NULL,
+ISBN INTEGER NOT NULL,
+ISBN13 INTEGER NOT NULL,
+language_code TEXT NOT NULL,
+num_pages INTEGER NOT NULL,
+ratings_count INTEGER NOT NULL,
+text_reviews_count INTEGER NOT NULL,
+publication_date DATE NOT NULL,
+publisher TEXT NOT NULL
+);
+
+#Then I inserted the Goodreads Data .csv into the table.
+
+#Next, I explored the data using the following SQL. 
+
+#First I determined the avg rating of books published in 2010 
+SELECT AVG (average_rating)
+FROM BIT_DB.Goodreads
+WHERE publication_date LIKE "%2010%";
+
+#Then I looked at the average rating of authors who have received over 1,000 ratings on Goodreads.
+SELECT distinct (authors), AVG (average_rating) AS average_rating, ratings_count, text_reviews_count
+FROM BIT_DB.Goodreads WHERE ratings_count>1000 GROUP BY authors ORDER BY average_rating desc;
+
+#I also looked at the average rating of publishers that have received over 1,000 ratings on Goodreads.
+SELECT distinct (publisher), AVG (average_rating) AS average_rating, ratings_count, text_reviews_count
+FROM BIT_DB.Goodreads WHERE ratings_count>1000 GROUP BY publisher ORDER BY average_rating desc;
+
+#Finally, I looked at how many books each publisher had listed in the data set.
+SELECT distinct (publisher), COUNT(*) AS number_of_books_published FROM BIT_DB.Goodreads GROUP BY publisher ORDER BY number_of_books_published desc; 
