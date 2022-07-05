@@ -1,71 +1,55 @@
-Show all customers not in the USA.
-
+#Show all customers not in the USA.
 SELECT customerid, firstname, lastname, country FROM chinook.customers WHERE country != "USA";
 
+#Show all customer information for customers living in Brazil.
 SELECT customerid, firstname, lastname, country FROM chinook.customers WHERE country = "Brazil";
 
+#Show all invoice info from customers living in Brazil.
 SELECT chinook.customers.firstname,chinook.customers.lastname, chinook.invoices.invoiceid, chinook.invoices.invoicedate, chinook.customers.country
 FROM chinook.invoices
 JOIN chinook.customers
 ON chinook.invoices.customerid=chinook.customers.customerid
 WHERE country = "Brazil";
 
+#Show list of employees who are sales agents.
 SELECT employeeid, lastname, firstname, title FROM chinook.employees WHERE title="Sales Support Agent";
 
-SELECT * FROM chinook.invoices LIMIT 10;
-
+#Display a unique list of billing countries.
 SELECT distinct billingcountry FROM chinook.invoices;
 
-SELECT * FROM chinook.invoices LIMIT 10;
-
+#Show invoices associated with each selling agent.
 SELECT chinook.employees.lastname, chinook.employees.firstname, chinook.invoices.invoiceid
 FROM chinook.employees
 JOIN chinook.customers ON chinook.customers.supportrepid=chinook.employees.EmployeeId
 JOIN chinook.invoices ON chinook.invoices.customerid=chinook.customers.customerid;
 
-
+#Show invoice total for all invoices and customers.
 SELECT chinook.employees.lastname, chinook.employees.firstname, chinook.customers.firstname, chinook.customers.lastname, chinook.customers.country, chinook.invoices.total)
 FROM chinook.employees
 JOIN chinook.customers ON chinook.customers.supportrepid=chinook.employees.EmployeeId
 JOIN chinook.invoices ON chinook.invoices.customerid=chinook.customers.customerid;
 
+#Show number of invoices in 2009.
 SELECT COUNT (*) FROM invoices WHERE chinook.invoices.invoicedate BETWEEN '2009-01-01' AND "2009-12-31";
 
+#Show total sales for 2009.
 SELECT SUM (chinook.invoices.total) FROM chinook.invoices WHERE chinook.invoices.invoicedate BETWEEN '2009-01-01' AND "2009-12-31";
 
+#Show purchased track name with each invoice line item.
 SELECT chinook.tracks.Name, chinook.invoice_items.invoiceid
 FROM chinook.tracks
 JOIN chinook.invoice_items
 ON chinook.tracks.trackid=chinook.invoice_items.trackid;
 
+#Show media type, album, and genre of all tracks.
 SELECT chinook.tracks.name AS track_name, chinook.albums.title AS album_name,
 chinook.media_types.name AS media_type, chinook.genres.name AS genre FROM chinook.tracks
 JOIN chinook.albums ON chinook.tracks.albumID=chinook.albums.albumid
 JOIN chinook.media_types ON chinook.tracks.mediatypeid=chinook.media_types.mediatypeid
 JOIN chinook.genres ON chinook.tracks.genreid=chinook.genres.genreid;
 
+#Show total sales made by each agent.
 SELECT chinook.employees.employeeid,chinook.employees.firstname AS first_name,chinook.employees.lastname AS last_name,chinook.invoices.total AS total
 FROM chinook.employees
 JOIN chinook.customers ON chinook.employees.employeeid=chinook.customers.supportrepid
 GROUP BY chinook.employees.employeeid;
-
-SELECT 
-cust.acctnum
-,count(cust.order_ID) as Orders
-,Feb.Product
-,Feb.Quantity
-,Feb.price
-,Feb.orderdate
-,Feb.location
-FROM BIT_DB.customers cust
-
-INNER JOIN BIT_DB.FebSales Feb
-ON cust.order_id=FEB.orderid
-
-GROUP BY 
-cust.acctnum
-,Feb.Product
-,Feb.Quantity
-,Feb.price
-,Feb.orderdate
-,Feb.location;
