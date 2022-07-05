@@ -1,0 +1,71 @@
+Show all customers not in the USA.
+
+SELECT customerid, firstname, lastname, country FROM chinook.customers WHERE country != "USA";
+
+SELECT customerid, firstname, lastname, country FROM chinook.customers WHERE country = "Brazil";
+
+SELECT chinook.customers.firstname,chinook.customers.lastname, chinook.invoices.invoiceid, chinook.invoices.invoicedate, chinook.customers.country
+FROM chinook.invoices
+JOIN chinook.customers
+ON chinook.invoices.customerid=chinook.customers.customerid
+WHERE country = "Brazil";
+
+SELECT employeeid, lastname, firstname, title FROM chinook.employees WHERE title="Sales Support Agent";
+
+SELECT * FROM chinook.invoices LIMIT 10;
+
+SELECT distinct billingcountry FROM chinook.invoices;
+
+SELECT * FROM chinook.invoices LIMIT 10;
+
+SELECT chinook.employees.lastname, chinook.employees.firstname, chinook.invoices.invoiceid
+FROM chinook.employees
+JOIN chinook.customers ON chinook.customers.supportrepid=chinook.employees.EmployeeId
+JOIN chinook.invoices ON chinook.invoices.customerid=chinook.customers.customerid;
+
+
+SELECT chinook.employees.lastname, chinook.employees.firstname, chinook.customers.firstname, chinook.customers.lastname, chinook.customers.country, chinook.invoices.total)
+FROM chinook.employees
+JOIN chinook.customers ON chinook.customers.supportrepid=chinook.employees.EmployeeId
+JOIN chinook.invoices ON chinook.invoices.customerid=chinook.customers.customerid;
+
+SELECT COUNT (*) FROM invoices WHERE chinook.invoices.invoicedate BETWEEN '2009-01-01' AND "2009-12-31";
+
+SELECT SUM (chinook.invoices.total) FROM chinook.invoices WHERE chinook.invoices.invoicedate BETWEEN '2009-01-01' AND "2009-12-31";
+
+SELECT chinook.tracks.Name, chinook.invoice_items.invoiceid
+FROM chinook.tracks
+JOIN chinook.invoice_items
+ON chinook.tracks.trackid=chinook.invoice_items.trackid;
+
+SELECT chinook.tracks.name AS track_name, chinook.albums.title AS album_name,
+chinook.media_types.name AS media_type, chinook.genres.name AS genre FROM chinook.tracks
+JOIN chinook.albums ON chinook.tracks.albumID=chinook.albums.albumid
+JOIN chinook.media_types ON chinook.tracks.mediatypeid=chinook.media_types.mediatypeid
+JOIN chinook.genres ON chinook.tracks.genreid=chinook.genres.genreid;
+
+SELECT chinook.employees.employeeid,chinook.employees.firstname AS first_name,chinook.employees.lastname AS last_name,chinook.invoices.total AS total
+FROM chinook.employees
+JOIN chinook.customers ON chinook.employees.employeeid=chinook.customers.supportrepid
+GROUP BY chinook.employees.employeeid;
+
+SELECT 
+cust.acctnum
+,count(cust.order_ID) as Orders
+,Feb.Product
+,Feb.Quantity
+,Feb.price
+,Feb.orderdate
+,Feb.location
+FROM BIT_DB.customers cust
+
+INNER JOIN BIT_DB.FebSales Feb
+ON cust.order_id=FEB.orderid
+
+GROUP BY 
+cust.acctnum
+,Feb.Product
+,Feb.Quantity
+,Feb.price
+,Feb.orderdate
+,Feb.location;
