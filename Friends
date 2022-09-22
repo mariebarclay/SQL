@@ -1,0 +1,43 @@
+I'm having fun playing with a Kaggle dataset of data from the TV series Friends.
+
+SELECT *
+  FROM Friends
+ LIMIT 10;
+
+*/Although most true Friends fans know how many seasons there were in the series, I wasn't sure how many seasons the dataset contained information for.*/
+SELECT MAX(season_number) 
+  FROM Friends;
+
+*/I was curious which characters out of the lead six had the most lines for the duration of the series
+(no one should be shocked that it's Rachel quickly followed by Ross)*/
+SELECT COUNT( * ) AS Total_Series_Line_Count,
+       character
+  FROM Friends
+ WHERE character IN ('ross', 'joey', 'chandler', 'rachel', 'monica', 'phoebe') 
+ GROUP BY character
+ ORDER BY Total_Series_Line_Count desc;
+
+*/So then I started wondering if Rachel and Ross took the lead in every season of the show - I broke down the line counts between the six lead characters even
+further to look at lines per character, per season*/
+SELECT COUNT( * ) AS Total_Line_Count_Per_Season,
+       character,
+       season_number
+  FROM Friends
+ WHERE character IN ('ross', 'joey', 'chandler', 'rachel', 'monica', 'phoebe') 
+ GROUP BY character,
+          season_number
+ ORDER BY season_number asc;
+
+*/I wanted to get even more detailed information about how the show spread lines (and presumably time spent in front of the camera) across the main six characters
+in each episode of each season. Watch for my Tableau visualization of a timeline of the show Friends using only the breakdown of lines per character*/
+SELECT COUNT( * ) AS Total_Line_Count_Per_Season_Per_Episode,
+       character,
+       season_number,
+       episode_number
+  FROM Friends
+ WHERE character IN ('ross', 'joey', 'chandler', 'rachel', 'monica', 'phoebe') 
+ GROUP BY character,
+          season_number,
+          episode_number
+ ORDER BY season_number asc,
+          episode_number asc;
